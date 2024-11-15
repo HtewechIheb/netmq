@@ -1,5 +1,6 @@
 ﻿using System;
 using AsyncIO;
+using NetMQ.Core;
 
 namespace NetMQ.Monitoring
 {
@@ -107,5 +108,29 @@ namespace NetMQ.Monitoring
         /// Gets the interval, in milliseconds.
         /// </summary>
         public int Interval { get; }
+    }
+
+    /// <summary>
+    /// A subclass of <see cref="NetMQMonitorEventArgs"/> that also holds the peer socket identity.
+    /// </summary>
+    public class NetMQMonitorPeerIdentityEventArgs : NetMQMonitorEventArgs
+    {
+        /// <summary>
+        /// Create a new NetMQMonitorPeerIdentityEventArgs containing the given NetMQMonitor, address, and peer socket identity.
+        /// </summary>
+        /// <param name="monitor">The NetMQMonitor.</param>
+        /// <param name="address">The string denoting the address.</param>
+        /// <param name="socketIdentity">The identity of the peer socket.</param>
+        /// <param name="socketEvent">The type of socket event that occurred.</param>
+        public NetMQMonitorPeerIdentityEventArgs(NetMQMonitor monitor, string address, SocketIdentity? socketIdentity, SocketEvents socketEvent)
+            : base(monitor, address, socketEvent)
+        {
+            SocketIdentity = socketIdentity;
+        }
+
+        /// <summary>
+        /// Gets the identity associated with the peer socket.
+        /// </summary>
+        public SocketIdentity? SocketIdentity { get; }
     }
 }

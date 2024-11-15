@@ -182,7 +182,8 @@ namespace NetMQ.Core.Mechanisms
             //  Add identity property
             if (Options.SocketType == ZmqSocketType.Req || 
                 Options.SocketType == ZmqSocketType.Dealer || 
-                Options.SocketType == ZmqSocketType.Router)
+                Options.SocketType == ZmqSocketType.Router ||
+                Options.SocketType == ZmqSocketType.Sub)
             {
                 if (Options.Identity != null)
                 {
@@ -207,7 +208,8 @@ namespace NetMQ.Core.Mechanisms
 
                 if (Options.SocketType == ZmqSocketType.Req ||
                     Options.SocketType == ZmqSocketType.Dealer ||
-                    Options.SocketType == ZmqSocketType.Router)
+                    Options.SocketType == ZmqSocketType.Router ||
+                    Options.SocketType == ZmqSocketType.Sub)
                     length += GetPropertyLength(ZmtpPropertyIdentity, Options.IdentitySize);
 
                 return length;    

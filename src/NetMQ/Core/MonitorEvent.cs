@@ -41,6 +41,11 @@ namespace NetMQ.Core
         {
         }
 
+        public MonitorEvent(SocketEvents monitorEvent, string addr, SocketIdentity arg)
+            : this(monitorEvent, addr, (object)arg)
+        {
+        }
+
         private MonitorEvent(SocketEvents monitorEvent, string addr, object? arg)
         {
             m_monitorEvent = monitorEvent;
@@ -49,7 +54,7 @@ namespace NetMQ.Core
 
             if (arg is int)
                 m_flag = ValueInteger;
-            else if (arg is AsyncSocket)
+            else if (arg is AsyncSocket or SocketIdentity)
                 m_flag = ValueChannel;
             else
                 m_flag = 0;
@@ -142,16 +147,20 @@ namespace NetMQ.Core
                     : new IntPtr(data.GetLong(Endianness.Little, pos));
 
                 GCHandle handle = GCHandle.FromIntPtr(value);
-                AsyncSocket? socket = null;
 
                 if (handle.IsAllocated)
                 {
-                    socket = handle.Target as AsyncSocket;
+                    if (handle.Target is AsyncSocket socket)
+                    {
+                        arg = socket;
+                    }
+                    else if (handle.Target is SocketIdentity socketIdentity)
+                    {
+                        arg = socketIdentity;
+                    }
                 }
 
                 handle.Free();
-
-                arg = socket;
             }
 
             return new MonitorEvent(@event, addr, arg);

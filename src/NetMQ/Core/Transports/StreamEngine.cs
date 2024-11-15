@@ -321,6 +321,10 @@ namespace NetMQ.Core.Transports
         {
             Debug.Assert(m_session != null);
             m_state = State.Error;
+            if (m_mechanism?.PeerIdentity != null) 
+            { 
+                m_socket.EventIdentifiedPeerDisconnected(m_endpoint, new SocketIdentity(m_mechanism.PeerIdentity, m_handle));
+            }
             m_socket.EventDisconnected(m_endpoint, m_handle);
             m_session.Flush();
             m_session.Detach();
@@ -1211,6 +1215,7 @@ namespace NetMQ.Core.Transports
                 }
                 
                 m_session.Flush();
+                m_socket.EventPeerIdentified(m_endpoint, new SocketIdentity(m_mechanism.PeerIdentity, m_handle));
             }
 
             m_nextMsg = PullAndEncode;
