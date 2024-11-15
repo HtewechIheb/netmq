@@ -150,6 +150,15 @@ namespace NetMQ.Monitoring
         /// </summary>
         public event EventHandler<NetMQMonitorSocketEventArgs>? Disconnected;
 
+        /// <summary>
+        /// Occurs when a peer's identity is received.
+        /// </summary>
+        public event EventHandler<NetMQMonitorPeerIdentityEventArgs>? PeerIdentified;
+
+        /// <summary>
+        /// Occurs when an identified peer is disconnected.
+        /// </summary>
+        public event EventHandler<NetMQMonitorPeerIdentityEventArgs>? IdentifiedPeerDisconnected;
         #endregion
 
         private void Handle(object sender, NetMQSocketEventArgs socketEventArgs)
@@ -187,6 +196,12 @@ namespace NetMQ.Monitoring
                     break;
                 case SocketEvents.Disconnected:
                     InvokeEvent(Disconnected, new NetMQMonitorSocketEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<AsyncSocket>(), SocketEvents.Disconnected));
+                    break;
+                case SocketEvents.PeerIdentified:
+                    InvokeEvent(PeerIdentified, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<byte[]>(), SocketEvents.PeerIdentified));
+                    break;
+                case SocketEvents.IdentifiedPeerDisconnected:
+                    InvokeEvent(IdentifiedPeerDisconnected, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<byte[]>(), SocketEvents.IdentifiedPeerDisconnected));
                     break;
                 default:
                     throw new Exception("unknown event " + monitorEvent.Event);

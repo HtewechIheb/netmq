@@ -59,12 +59,23 @@ namespace NetMQ
         Disconnected = 512,
 
         /// <summary>
+        /// Peer identified
+        /// </summary>
+        PeerIdentified = 1024,
+
+        /// <summary>
+        /// Identified peer disconnected
+        /// </summary>
+        IdentifiedPeerDisconnected = 2048,
+
+        /// <summary>
         /// Listen to all events
         /// </summary>
         All = Connected | ConnectDelayed |
               ConnectRetried | Listening |
               BindFailed | Accepted |
               AcceptFailed | Closed |
-              CloseFailed | Disconnected
+              CloseFailed | Disconnected |
+              PeerIdentified | IdentifiedPeerDisconnected
     }
 }
