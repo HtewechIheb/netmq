@@ -663,7 +663,10 @@ namespace NetMQ.Core
                 
                 case ZmqSocketOption.CurveServerKey:
                     return CurveServerKey;
-                
+
+                case ZmqSocketOption.RecvIdentity:
+                    return RecvIdentity;
+
                 default:
                     throw new InvalidException("GetSocketOption called with invalid ZmqSocketOption of " + option);
             }

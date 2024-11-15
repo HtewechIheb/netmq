@@ -514,5 +514,14 @@ namespace NetMQ
             get => m_socket.GetSocketOptionX<bool>(ZmqSocketOption.Correlate);
             set => m_socket.SetSocketOption(ZmqSocketOption.Correlate, value);
         }
+
+        /// <summary>
+        /// Gets the identity of the peer socket.
+        /// </summary>
+        public bool RecvIdentity
+        {
+            get => m_socket.GetSocketOptionX<bool>(ZmqSocketOption.RecvIdentity);
+            set => m_socket.SetSocketOption(ZmqSocketOption.RecvIdentity, value);
+        }
     }
 }
