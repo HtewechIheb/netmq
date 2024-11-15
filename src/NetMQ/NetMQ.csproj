@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>A 100% native C# port of the lightweight high performance messaging library ZeroMQ</Description>
-    <Version>4.0.0.0</Version>
+    <Description>A 100% native C# port of the lightweight high performance messaging library ZeroMQ (custom pub/sub fork)</Description>
+    <Version>4.0.1.13</Version>
     <TargetFrameworks>net45;net47;netstandard2.0;netstandard2.1</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyOriginatorKeyFile>./NetMQ.snk</AssemblyOriginatorKeyFile>
@@ -10,10 +10,9 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageTags>ZeroMQ;0MQ;CLRZMQ;NetMQ;Messaging;ZMQ;transport;distributed</PackageTags>
     <PackageIcon>NetMQLogoSquare-256px.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/zeromq/netmq</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/zeromq/netmq/blob/master/COPYING.LESSER</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/HtewechIheb/netmq</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/zeromq/netmq.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/HtewechIheb/netmq.git</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Deterministic>true</Deterministic>
     <DeterministicSourcePaths>true</DeterministicSourcePaths>
@@ -22,6 +21,14 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>CustomPubSub.NetMQ</PackageId>
+    <Title>Custom Pub/Sub NetMQ</Title>
+    <Authors>IhebHtewech</Authors>
+    <Company></Company>
+    <PackageReleaseNotes>Add identity metadata to Subscriber sockets connected to a Publisher socket to identify subscribers connected to a publisher.</PackageReleaseNotes>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' != 'netstandard2.1' ">
