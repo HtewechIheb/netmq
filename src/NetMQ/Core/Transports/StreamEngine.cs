@@ -321,7 +321,10 @@ namespace NetMQ.Core.Transports
         {
             Debug.Assert(m_session != null);
             m_state = State.Error;
-            m_socket.EventIdentifiedPeerDisconnected(m_endpoint, m_mechanism.PeerIdentity);
+            if (m_mechanism?.PeerIdentity != null) 
+            { 
+                m_socket.EventIdentifiedPeerDisconnected(m_endpoint, m_mechanism.PeerIdentity);
+            }
             m_socket.EventDisconnected(m_endpoint, m_handle);
             m_session.Flush();
             m_session.Detach();
