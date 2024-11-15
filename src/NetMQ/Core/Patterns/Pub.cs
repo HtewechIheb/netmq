@@ -38,7 +38,6 @@ namespace NetMQ.Core.Patterns
             : base(parent, threadId, socketId)
         {
             m_options.SocketType = ZmqSocketType.Pub;
-            m_options.RecvIdentity = true;
         }
 
         /// <summary>

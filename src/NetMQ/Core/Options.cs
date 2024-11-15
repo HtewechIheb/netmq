@@ -344,7 +344,7 @@ namespace NetMQ.Core
             {
                 case ZmqSocketOption.SendHighWatermark:
                     SendHighWatermark = Get<int>();
-                    break;
+                    break; 
 
                 case ZmqSocketOption.ReceiveHighWatermark:
                     ReceiveHighWatermark = Get<int>();
@@ -539,7 +539,12 @@ namespace NetMQ.Core
                         Correlate = Get<bool>();
                         break;
                     }
-                
+                case ZmqSocketOption.RecvIdentity:
+                    {
+                        RecvIdentity = Get<bool>();
+                        break;
+                    }
+
                 default:
                     throw new InvalidException("Options.SetSocketOption called with invalid ZmqSocketOption of " + option);
             }
