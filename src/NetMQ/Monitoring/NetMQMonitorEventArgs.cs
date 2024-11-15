@@ -1,5 +1,6 @@
 ﻿using System;
 using AsyncIO;
+using NetMQ.Core;
 
 namespace NetMQ.Monitoring
 {
@@ -119,17 +120,17 @@ namespace NetMQ.Monitoring
         /// </summary>
         /// <param name="monitor">The NetMQMonitor.</param>
         /// <param name="address">The string denoting the address.</param>
-        /// <param name="identity">The identity of the peer socket.</param>
+        /// <param name="socketIdentity">The identity of the peer socket.</param>
         /// <param name="socketEvent">The type of socket event that occurred.</param>
-        public NetMQMonitorPeerIdentityEventArgs(NetMQMonitor monitor, string address, byte[]? identity, SocketEvents socketEvent)
+        public NetMQMonitorPeerIdentityEventArgs(NetMQMonitor monitor, string address, SocketIdentity? socketIdentity, SocketEvents socketEvent)
             : base(monitor, address, socketEvent)
         {
-            Identity = identity;
+            SocketIdentity = socketIdentity;
         }
 
         /// <summary>
         /// Gets the identity associated with the peer socket.
         /// </summary>
-        public byte[]? Identity { get; }
+        public SocketIdentity? SocketIdentity { get; }
     }
 }

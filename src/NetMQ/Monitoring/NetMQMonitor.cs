@@ -198,10 +198,10 @@ namespace NetMQ.Monitoring
                     InvokeEvent(Disconnected, new NetMQMonitorSocketEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<AsyncSocket>(), SocketEvents.Disconnected));
                     break;
                 case SocketEvents.PeerIdentified:
-                    InvokeEvent(PeerIdentified, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<byte[]>(), SocketEvents.PeerIdentified));
+                    InvokeEvent(PeerIdentified, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<SocketIdentity>(), SocketEvents.PeerIdentified));
                     break;
                 case SocketEvents.IdentifiedPeerDisconnected:
-                    InvokeEvent(IdentifiedPeerDisconnected, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<byte[]>(), SocketEvents.IdentifiedPeerDisconnected));
+                    InvokeEvent(IdentifiedPeerDisconnected, new NetMQMonitorPeerIdentityEventArgs(this, monitorEvent.Addr, monitorEvent.ConvertArg<SocketIdentity>(), SocketEvents.IdentifiedPeerDisconnected));
                     break;
                 default:
                     throw new Exception("unknown event " + monitorEvent.Event);

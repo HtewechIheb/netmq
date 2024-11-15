@@ -41,7 +41,7 @@ namespace NetMQ.Core
         {
         }
 
-        public MonitorEvent(SocketEvents monitorEvent, string addr, byte[] arg)
+        public MonitorEvent(SocketEvents monitorEvent, string addr, SocketIdentity arg)
             : this(monitorEvent, addr, (object)arg)
         {
         }
@@ -54,7 +54,7 @@ namespace NetMQ.Core
 
             if (arg is int)
                 m_flag = ValueInteger;
-            else if (arg is byte[] or AsyncSocket)
+            else if (arg is AsyncSocket or SocketIdentity)
                 m_flag = ValueChannel;
             else
                 m_flag = 0;
@@ -150,13 +150,13 @@ namespace NetMQ.Core
 
                 if (handle.IsAllocated)
                 {
-                    if (handle.Target is byte[] bytes)
-                    {
-                        arg = bytes;
-                    }
-                    else if (handle.Target is AsyncSocket socket)
+                    if (handle.Target is AsyncSocket socket)
                     {
                         arg = socket;
+                    }
+                    else if (handle.Target is SocketIdentity socketIdentity)
+                    {
+                        arg = socketIdentity;
                     }
                 }
 

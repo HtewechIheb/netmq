@@ -1695,20 +1695,20 @@ namespace NetMQ.Core
             MonitorEvent(new MonitorEvent(SocketEvents.Disconnected, addr, ch));
         }
 
-        public void EventPeerIdentified(string addr, byte[] peerIdentity)
+        public void EventPeerIdentified(string addr, SocketIdentity socketIdentity)
         {
             if ((m_monitorEvents & SocketEvents.PeerIdentified) == 0)
                 return;
 
-            MonitorEvent(new MonitorEvent(SocketEvents.PeerIdentified, addr, peerIdentity));
+            MonitorEvent(new MonitorEvent(SocketEvents.PeerIdentified, addr, socketIdentity));
         }
 
-        public void EventIdentifiedPeerDisconnected(string addr, byte[] peerIdentity)
+        public void EventIdentifiedPeerDisconnected(string addr, SocketIdentity socketIdentity)
         {
             if ((m_monitorEvents & SocketEvents.IdentifiedPeerDisconnected) == 0)
                 return;
 
-            MonitorEvent(new MonitorEvent(SocketEvents.IdentifiedPeerDisconnected, addr, peerIdentity));
+            MonitorEvent(new MonitorEvent(SocketEvents.IdentifiedPeerDisconnected, addr, socketIdentity));
         }
 
         private void MonitorEvent(MonitorEvent monitorEvent)
