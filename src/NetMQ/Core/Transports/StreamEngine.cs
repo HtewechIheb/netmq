@@ -1202,7 +1202,7 @@ namespace NetMQ.Core.Transports
                 m_hasHeartbeatTimer = true;
             }
             
-            if (m_options.RecvIdentity) {
+            if (m_options.RecvIdentity && m_mechanism.PeerIdentity != null) {
                 Msg identity = new Msg();
                 identity.InitPool(m_mechanism.PeerIdentity.Length);
                 identity.Put(m_mechanism.PeerIdentity, 0, m_mechanism.PeerIdentity.Length);
